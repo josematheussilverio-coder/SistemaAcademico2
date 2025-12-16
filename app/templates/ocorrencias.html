@@ -19,31 +19,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'disciplinas' %}">Disciplinas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'turmas' %}">Turmas</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'cadastros' %}">Cadastro</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'matriculas' %}">Matrículas</a></li>
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navDiario" role="button" data-toggle="dropdown">
-                        Diário de Classe
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'frequencias' %}">Frequência/Faltas</a>
-                        <a class="dropdown-item" href="{% url 'avaliacoes' %}">Notas e Avaliações</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item active" href="{% url 'ocorrencias' %}">Ocorrências</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navAux" role="button" data-toggle="dropdown">
-                        Auxiliares
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'instituicoes' %}">Instituições</a>
-                        <a class="dropdown-item" href="{% url 'areas' %}">Áreas do Saber</a>
-                        <a class="dropdown-item" href="{% url 'cidades' %}">Cidades</a>
-                    </div>
-                </li>
-                
+                <li class="nav-item"><a class="nav-link" href="{% url 'matriculas' %}">Matrículas</a></li>                
                 <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
             </ul>
         </div>
