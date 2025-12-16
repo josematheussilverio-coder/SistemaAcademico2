@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliações</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <a class="navbar-brand" href="{% url 'index' %}">Sistema Acadêmico</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cursos' %}">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'disciplinas' %}">Disciplinas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'turmas' %}">Turmas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cadastros' %}">Cadastro</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'matriculas' %}">Matrículas</a></li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle font-weight-bold" href="#" id="navDiario" role="button" data-toggle="dropdown">
+                        Diário de Classe
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'frequencias' %}">Frequência/Faltas</a>
+                        <a class="dropdown-item active" href="{% url 'avaliacoes' %}">Notas e Avaliações</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ocorrencias' %}">Ocorrências</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navAux" role="button" data-toggle="dropdown">
+                        Auxiliares
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'instituicoes' %}">Instituições</a>
+                        <a class="dropdown-item" href="{% url 'areas' %}">Áreas do Saber</a>
+                        <a class="dropdown-item" href="{% url 'cidades' %}">Cidades</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Notas e Avaliações</h2>
+            <a href="{% url 'avaliacao_novo' %}" class="btn btn-success font-weight-bold">+ Lançar Nota</a>
+        </div>
+
+        <table class="table table-hover shadow-sm">
+            <thead class="bg-success text-white">
+                <tr>
+                    <th>Estudante</th>
+                    <th>Disciplina</th>
+                    <th>Avaliação</th>
+                    <th>Nota</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for av in avaliacoes %}
+                <tr>
+                    <td>{{ av.pessoa }}</td>
+                    <td>{{ av.disciplina }}</td>
+                    <td>
+                        {{ av.descricao }} <br>
+                        <small class="text-muted">{{ av.tipoavaliacao }}</small>
+                    </td>
+                    <td>
+                        <span class="badge badge-pill badge-secondary" style="font-size: 1.1em;">{{ av.nota }}</span>
+                    </td>
+                    <td>
+                        <a href="{% url 'avaliacao_editar' av.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'avaliacao_excluir' av.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center">Nenhuma nota lançada.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -86,10 +86,10 @@ class Pessoa(models.Model):
     def __str__(self):
         return self.nome
 
-class PessoaFisica(Pessoa):
+class Cadastro(Pessoa):
     class Meta:
-        verbose_name = "Pessoa"
-        verbose_name_plural = "Pessoas"
+        verbose_name = "Cadastro"
+        verbose_name_plural = "Cadastros"
 
 class InstituicaoEnsino(models.Model):
     nome = models.CharField(max_length=255, verbose_name="Nome")
@@ -152,7 +152,7 @@ class DisciplinaCurso(models.Model):
 class Turma(models.Model):
     nome = models.CharField(max_length=100, verbose_name="Nome da Turma")
     turno = models.ForeignKey(Turno, on_delete=models.PROTECT, verbose_name="Turno")
-    curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso") # Adicionado para contexto
+    curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso") 
 
     def __str__(self):
         return f"{self.nome} ({self.turno.nome})"
@@ -164,7 +164,7 @@ class Turma(models.Model):
 
 
 class Matricula(models.Model):
-    pessoa = models.ForeignKey(PessoaFisica, on_delete=models.PROTECT, verbose_name="Pessoa (Estudante)")
+    pessoa = models.ForeignKey(Cadastro, on_delete=models.PROTECT, verbose_name="Pessoa (Estudante)")
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso")
     turma = models.ForeignKey(Turma, on_delete=models.PROTECT, verbose_name="Turma") 
     data_inicio = models.DateField(verbose_name="Data de Início")
@@ -187,8 +187,8 @@ class Avaliacao(models.Model):
 
     tipoavaliacao = models.ForeignKey(TipoAvaliacao, on_delete=models.PROTECT, verbose_name="Tipo de Avaliação")
     disciplina = models.ForeignKey(Disciplina, on_delete=models.PROTECT, verbose_name="Disciplina")
-    pessoa = models.ForeignKey(PessoaFisica, on_delete=models.PROTECT, verbose_name="Pessoa Avaliada") # Quem fez a prova
-    curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso") # Adicionado para contexto
+    pessoa = models.ForeignKey(Cadastro, on_delete=models.PROTECT, verbose_name="Pessoa Avaliada") 
+    curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso") 
 
     def __str__(self):
         return f"{self.descricao} - {self.disciplina.nome}"
@@ -203,7 +203,7 @@ class Frequencia(models.Model):
     numero_faltas = models.IntegerField(verbose_name="Número de Faltas")
     
     disciplina = models.ForeignKey(Disciplina, on_delete=models.PROTECT, verbose_name="Disciplina")
-    pessoa = models.ForeignKey(PessoaFisica, on_delete=models.PROTECT, verbose_name="Pessoa (Aluno)") # Quem faltou
+    pessoa = models.ForeignKey(Cadastro, on_delete=models.PROTECT, verbose_name="Pessoa (Aluno)") # Quem faltou
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso") # Adicionado para contexto
 
     def __str__(self):
@@ -218,7 +218,7 @@ class Ocorrencia(models.Model):
     descricao = models.TextField(verbose_name="Descrição da Ocorrência")
     data = models.DateField(auto_now_add=True, verbose_name="Data do Registro")
     
-    pessoa = models.ForeignKey(PessoaFisica, on_delete=models.PROTECT, verbose_name="Pessoa Envolvida")
+    pessoa = models.ForeignKey(Cadastro, on_delete=models.PROTECT, verbose_name="Pessoa Envolvida")
     curso = models.ForeignKey(Curso, on_delete=models.PROTECT, verbose_name="Curso", null=True, blank=True)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.PROTECT, verbose_name="Disciplina", null=True, blank=True)
 

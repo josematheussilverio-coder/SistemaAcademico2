@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Exclusão</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-danger shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="mb-0">Atenção!</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="lead mt-3">
+                            Tem certeza que deseja excluir permanentemente:
+                            <br>
+                            <strong>{{ object }}</strong>?
+                        </p>
+                        <p class="text-muted small">Esta ação não pode ser desfeita.</p>
+                        
+                        <form method="post" class="mt-4 mb-3">
+                            {% csrf_token %}
+                            <a href="javascript:history.back()" class="btn btn-secondary mr-2">Cancelar</a>
+                            <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

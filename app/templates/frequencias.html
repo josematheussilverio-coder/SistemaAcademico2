@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Frequência</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <a class="navbar-brand" href="{% url 'index' %}">Sistema Acadêmico</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cursos' %}">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'disciplinas' %}">Disciplinas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'turmas' %}">Turmas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cadastros' %}">Cadastro</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'matriculas' %}">Matrículas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'frequencias' %}">Frequencia</a> </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ocorrencias' %}">Ocorrencias</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'avaliacoes' %}">Avaliacoes</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Frequência (Faltas)</h2>
+            <a href="{% url 'frequencia_novo' %}" class="btn btn-warning text-dark font-weight-bold">+ Registrar Faltas</a>
+        </div>
+
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Data</th>
+                    <th>Estudante</th>
+                    <th>Disciplina</th>
+                    <th>Nº Faltas</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for freq in frequencias %}
+                <tr>
+                    <td>{{ freq.data|date:"d/m/Y" }}</td>
+                    <td>{{ freq.pessoa }}</td>
+                    <td>{{ freq.disciplina }}</td>
+                    <td class="text-center font-weight-bold text-danger">{{ freq.numero_faltas }}</td>
+                    <td>
+                        <a href="{% url 'frequencia_editar' freq.id %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'frequencia_excluir' freq.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-center">Nenhum registro de falta.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

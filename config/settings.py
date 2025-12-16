@@ -1,18 +1,14 @@
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-8l8o(-2su$6t%k424293i#x672q0$*^itfyi9r32$8j-igo7zf'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,12 +17,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app', #o template usado
+    'app', 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SssionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,12 +52,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'biblioteca_n',
+        'NAME': 'SistemaAcademico2',
         'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
@@ -69,7 +64,6 @@ DATABASES = {
     }
 }
 
-# Password validation
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,21 +80,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization and Localization
 
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(STATIC_URL, "static") # Esta linha está incorreta, deveria usar BASE_DIR. Mantido conforme original.
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "app/static/"),
+    os.path.join(BASE_DIR, "app/static/"), 
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
 
-# Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
